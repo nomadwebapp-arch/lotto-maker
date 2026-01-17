@@ -24,7 +24,16 @@ interface LottoDetailResult {
 
 async function fetchBasicResult(drwNo: string) {
   const response = await fetch(
-    `https://www.dhlottery.co.kr/common.do?method=getLottoNumber&drwNo=${drwNo}`
+    `https://www.dhlottery.co.kr/common.do?method=getLottoNumber&drwNo=${drwNo}`,
+    {
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+        'Accept': 'application/json, text/plain, */*',
+        'Accept-Language': 'ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7',
+        'Referer': 'https://www.dhlottery.co.kr/',
+        'Origin': 'https://www.dhlottery.co.kr',
+      }
+    }
   );
   return response.json();
 }
@@ -115,14 +124,19 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   res.setHeader('Access-Control-Allow-Methods', 'GET');
 
   try {
-    // 기본 정보와 상세 정보 병렬로 가져오기
-    const [basicData, prizes] = await Promise.all([
-      fetchBasicResult(drwNo as string),
-      fetchDetailedResult(drwNo as string)
-    ]);
+    // 기본 정보 가져오기
+    const basicData = await fetchBasicResult(drwNo as string);
 
     if (basicData.returnValue !== 'success') {
       return res.status(200).json(basicData);
+    }
+
+    // 상세 정보는 별도로 시도 (실패해도 기본 정보 반환)
+    let prizes: PrizeInfo[] = [];
+    try {
+      prizes = await fetchDetailedResult(drwNo as string);
+    } catch {
+      // 상세 정보 실패시 무시
     }
 
     // 상세 정보 병합
@@ -141,6 +155,10 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return res.status(200).json(result);
   } catch (error) {
     console.error('API error:', error);
-    return res.status(500).json({ error: 'Failed to fetch lottery data' });
+    // 에러 발생시에도 샘플 데이터 반환
+    return res.status(200).json({
+      returnValue: 'fail',
+      error: 'Failed to fetch lottery data'
+    });
   }
 }
