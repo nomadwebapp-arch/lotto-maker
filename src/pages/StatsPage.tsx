@@ -223,14 +223,10 @@ function StatsPage() {
         setProgress(Math.round(((batch + 1) / totalBatches) * 100));
       }
 
-      // API 실패시 개발 환경에서 샘플 데이터 사용
-      if (results.length === 0 && import.meta.env.DEV) {
-        results = generateSampleData();
-      }
-
+      // API 실패시 샘플 데이터 사용
       if (results.length === 0) {
-        setError('데이터를 불러올 수 없습니다.');
-        return;
+        results = generateSampleData();
+        setError('※ 동행복권 API 연결 불가로 샘플 데이터를 표시합니다.');
       }
 
       // 중복 제거 및 정렬
@@ -246,13 +242,10 @@ function StatsPage() {
 
       calculateStats(uniqueResults);
     } catch {
-      // 개발 환경에서 에러 시 샘플 데이터 사용
-      if (import.meta.env.DEV) {
-        const sampleResults = generateSampleData();
-        calculateStats(sampleResults);
-      } else {
-        setError('통계 데이터를 불러오는 중 오류가 발생했습니다.');
-      }
+      // 에러 시 샘플 데이터 사용
+      const sampleResults = generateSampleData();
+      calculateStats(sampleResults);
+      setError('※ 동행복권 API 연결 불가로 샘플 데이터를 표시합니다.');
     } finally {
       setLoading(false);
     }
@@ -302,15 +295,21 @@ function StatsPage() {
             <span className="progress-text">{progress}%</span>
           </div>
         </div>
-      ) : error ? (
+      ) : numberStats.length === 0 ? (
         <div className="stats-content">
           <div className="error-box">
-            <p>{error}</p>
+            <p>데이터를 불러올 수 없습니다.</p>
             <button onClick={loadStats}>다시 시도</button>
           </div>
         </div>
       ) : (
         <>
+          {/* API 오류 알림 */}
+          {error && (
+            <div className="api-notice">
+              <p>{error}</p>
+            </div>
+          )}
           {/* 탭 메뉴 */}
           <div className="stats-tabs">
             <button

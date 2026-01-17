@@ -74,30 +74,26 @@ function ResultsPage() {
       }
     } catch (err) {
       console.error('Fetch error:', err);
-      // 개발 환경에서 API 실패시 샘플 데이터 사용
-      if (import.meta.env.DEV) {
-        const sampleData: LottoResult = {
-          drwNo: round,
-          drwNoDate: '2024-01-13',
-          drwtNo1: 3,
-          drwtNo2: 13,
-          drwtNo3: 24,
-          drwtNo4: 27,
-          drwtNo5: 39,
-          drwtNo6: 45,
-          bnusNo: 12,
-          firstWinamnt: 2123456789,
-          firstPrzwnerCo: 8,
-          firstAccumamnt: 16987654312,
-          totSellamnt: 98765432100,
-          returnValue: 'success'
-        };
-        setResult(sampleData);
-        setCurrentRound(round);
-        setLoading(false);
-        return;
-      }
-      setError('데이터를 불러오는 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
+      // API 실패시 샘플 데이터 사용
+      const sampleData: LottoResult = {
+        drwNo: round,
+        drwNoDate: '2025-01-18',
+        drwtNo1: 7,
+        drwtNo2: 11,
+        drwtNo3: 19,
+        drwtNo4: 28,
+        drwtNo5: 36,
+        drwtNo6: 42,
+        bnusNo: 15,
+        firstWinamnt: 1987654321,
+        firstPrzwnerCo: 12,
+        firstAccumamnt: 23851851852,
+        totSellamnt: 112345678900,
+        returnValue: 'success'
+      };
+      setResult(sampleData);
+      setCurrentRound(round);
+      setError('※ 현재 동행복권 API 연결 불가로 샘플 데이터를 표시합니다.');
     } finally {
       setLoading(false);
     }
@@ -259,13 +255,18 @@ function ResultsPage() {
             <div className="loading-spinner"></div>
             <p>데이터를 불러오는 중...</p>
           </div>
-        ) : error ? (
+        ) : !result ? (
           <div className="error-box">
-            <p>{error}</p>
+            <p>{error || '데이터를 불러올 수 없습니다.'}</p>
             <button onClick={() => fetchLottoResult(latestRound)}>다시 시도</button>
           </div>
-        ) : result && (
+        ) : (
           <>
+            {error && (
+              <div className="api-notice">
+                <p>{error}</p>
+              </div>
+            )}
             {/* 회차 네비게이션 */}
             <div className="round-nav">
               <button

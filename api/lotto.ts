@@ -23,19 +23,36 @@ interface LottoDetailResult {
 }
 
 async function fetchBasicResult(drwNo: string) {
-  const response = await fetch(
-    `https://www.dhlottery.co.kr/common.do?method=getLottoNumber&drwNo=${drwNo}`,
-    {
-      headers: {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-        'Accept': 'application/json, text/plain, */*',
-        'Accept-Language': 'ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7',
-        'Referer': 'https://www.dhlottery.co.kr/',
-        'Origin': 'https://www.dhlottery.co.kr',
+  // 여러 방법 시도
+  const targetUrl = `https://www.dhlottery.co.kr/common.do?method=getLottoNumber&drwNo=${drwNo}`;
+  const urls = [
+    targetUrl,
+    `https://corsproxy.io/?${encodeURIComponent(targetUrl)}`,
+    `https://api.allorigins.win/raw?url=${encodeURIComponent(targetUrl)}`,
+  ];
+
+  for (const url of urls) {
+    try {
+      const response = await fetch(url, {
+        headers: {
+          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+          'Accept': 'application/json, text/plain, */*',
+        }
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        if (data.returnValue === 'success') {
+          return data;
+        }
       }
+    } catch (e) {
+      console.log(`Failed with ${url}:`, e);
+      continue;
     }
-  );
-  return response.json();
+  }
+
+  throw new Error('All fetch attempts failed');
 }
 
 async function fetchDetailedResult(drwNo: string): Promise<PrizeInfo[]> {
