@@ -422,34 +422,37 @@
     padding: 12px;
   }
 
-  /* 모바일: 당첨금을 아래 줄로 */
+  /* 모바일: 당첨금을 아래 줄로 - iOS Safari 호환 */
   .prize-row {
-    flex-wrap: wrap;
+    display: flex !important;
+    flex-wrap: wrap !important;
     padding: 10px;
     gap: 6px;
   }
 
   .prize-row.header {
-    display: none;
+    display: none !important;
   }
 
   .prize-row > span:first-child {
-    flex: 0 0 auto;
-    width: auto;
+    flex: 0 0 auto !important;
+    width: auto !important;
   }
 
   .prize-row > span:nth-child(2) {
-    flex: 1;
+    flex: 1 1 auto !important;
     text-align: left;
   }
 
   .prize-row > span:last-child {
-    flex: 0 0 100%;
+    flex-basis: 100% !important;
+    width: 100% !important;
+    display: block !important;
     text-align: right;
     font-size: 0.9rem;
-    padding-top: 4px;
-    border-top: 1px solid rgba(255,255,255,0.1);
-    margin-top: 2px;
+    padding-top: 6px;
+    border-top: 1px solid rgba(255,255,255,0.15);
+    margin-top: 4px;
   }
 
   .rank {
@@ -458,12 +461,13 @@
   }
 
   .amount {
-    font-size: 0.9rem;
+    font-size: 0.9rem !important;
+    display: inline !important;
   }
 
   .amount.secondary,
   .amount.fixed {
-    font-size: 0.85rem;
+    font-size: 0.85rem !important;
   }
 }
 
