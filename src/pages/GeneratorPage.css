@@ -184,6 +184,7 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
+  align-items: stretch;
 }
 
 /* Responsive */
@@ -289,6 +290,12 @@
   .result-area {
     align-items: center;
     width: 100%;
+    max-width: 100%;
+  }
+
+  .result-area > * {
+    width: 100%;
+    max-width: 400px;
   }
 }
 

@@ -257,14 +257,29 @@
 }
 
 .prize-row {
-  display: grid;
-  grid-template-columns: 60px 1fr 1.5fr;
-  gap: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 10px;
   padding: 12px 15px;
   background: rgba(255, 255, 255, 0.05);
   border-radius: 10px;
   align-items: center;
   font-size: 0.95rem;
+}
+
+.prize-row > span:first-child {
+  flex: 0 0 50px;
+}
+
+.prize-row > span:nth-child(2) {
+  flex: 1;
+  min-width: 100px;
+}
+
+.prize-row > span:last-child {
+  flex: 1;
+  text-align: right;
+  min-width: 120px;
 }
 
 .prize-row.header {
@@ -366,9 +381,20 @@
   }
 
   .prize-row {
-    grid-template-columns: 50px 1fr 1fr;
     font-size: 0.85rem;
     padding: 10px;
+  }
+
+  .prize-row > span:first-child {
+    flex: 0 0 45px;
+  }
+
+  .prize-row > span:nth-child(2) {
+    min-width: 80px;
+  }
+
+  .prize-row > span:last-child {
+    min-width: 100px;
   }
 
   .prize-row.header {
@@ -403,9 +429,21 @@
   }
 
   .prize-row {
-    grid-template-columns: 45px 1fr 1fr;
-    gap: 8px;
     font-size: 0.8rem;
+    gap: 6px 8px;
+  }
+
+  .prize-row > span:first-child {
+    flex: 0 0 40px;
+  }
+
+  .prize-row > span:nth-child(2) {
+    min-width: 70px;
+  }
+
+  .prize-row > span:last-child {
+    min-width: 90px;
+    font-size: 0.75rem;
   }
 
   .amount.secondary {
@@ -437,15 +475,28 @@
   }
 
   .prize-row {
-    grid-template-columns: 40px 1fr 1fr;
-    gap: 5px;
-    font-size: 0.75rem;
-    padding: 8px;
+    font-size: 0.72rem;
+    padding: 8px 10px;
+    gap: 4px 6px;
+  }
+
+  .prize-row > span:first-child {
+    flex: 0 0 35px;
+  }
+
+  .prize-row > span:nth-child(2) {
+    min-width: 60px;
+    flex: 0 1 auto;
+  }
+
+  .prize-row > span:last-child {
+    min-width: 80px;
+    font-size: 0.68rem;
   }
 
   .rank {
     padding: 3px 6px;
-    font-size: 0.7rem;
+    font-size: 0.65rem;
   }
 
   .nav-btn {
@@ -491,8 +542,16 @@
   }
 
   .prize-row {
-    grid-template-columns: 35px 1fr 1fr;
-    font-size: 0.7rem;
+    font-size: 0.68rem;
+  }
+
+  .prize-row > span:first-child {
+    flex: 0 0 32px;
+  }
+
+  .prize-row > span:last-child {
+    min-width: 70px;
+    font-size: 0.65rem;
   }
 }
 
