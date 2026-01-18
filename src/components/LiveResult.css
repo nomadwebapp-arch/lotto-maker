@@ -208,6 +208,9 @@
 @media (max-width: 768px) {
   .live-result {
     padding: 16px;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
   }
 
   .live-result-header h2 {

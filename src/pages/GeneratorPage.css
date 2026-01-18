@@ -285,6 +285,11 @@
     padding: 20px;
     min-height: 400px;
   }
+
+  .result-area {
+    align-items: center;
+    width: 100%;
+  }
 }
 
 @media (max-width: 480px) {
