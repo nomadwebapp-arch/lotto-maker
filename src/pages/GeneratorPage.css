@@ -288,14 +288,21 @@
   }
 
   .result-area {
+    display: flex;
+    flex-direction: column;
     align-items: center;
+    justify-content: flex-start;
     width: 100%;
     max-width: 100%;
+    box-sizing: border-box;
   }
 
   .result-area > * {
     width: 100%;
     max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    box-sizing: border-box;
   }
 }
 
@@ -413,6 +420,14 @@
     padding: 12px;
     min-height: 300px;
     border-radius: 18px;
+  }
+
+  .result-area {
+    padding: 0 5px;
+  }
+
+  .result-area > * {
+    max-width: 100%;
   }
 }
 

@@ -210,7 +210,9 @@
     padding: 16px;
     width: 100%;
     max-width: 400px;
-    margin: 0 auto;
+    margin-left: auto;
+    margin-right: auto;
+    box-sizing: border-box;
   }
 
   .live-result-header h2 {
@@ -267,5 +269,46 @@
     min-width: 32px;
     min-height: 32px;
     font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 390px) {
+  .live-result {
+    padding: 12px;
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .live-result-header h2 {
+    font-size: 1rem;
+  }
+
+  .progress-indicator {
+    font-size: 0.8rem;
+    padding: 5px 10px;
+  }
+
+  .live-game-row {
+    padding: 6px 8px;
+    gap: 6px;
+  }
+
+  .live-row-label {
+    width: 22px;
+    height: 22px;
+    font-size: 10px;
+  }
+
+  .live-numbers-grid {
+    gap: 3px;
+  }
+
+  .live-ball {
+    width: 28px;
+    height: 28px;
+    min-width: 28px;
+    min-height: 28px;
+    font-size: 0.75rem;
   }
 }
