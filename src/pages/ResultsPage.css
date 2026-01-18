@@ -258,8 +258,8 @@
 
 .prize-row {
   display: flex;
-  flex-wrap: wrap;
-  gap: 8px 10px;
+  flex-wrap: nowrap;
+  gap: 6px;
   padding: 12px 15px;
   background: rgba(255, 255, 255, 0.05);
   border-radius: 10px;
@@ -268,18 +268,17 @@
 }
 
 .prize-row > span:first-child {
-  flex: 0 0 50px;
+  flex: 0 0 auto;
+  width: 50px;
 }
 
 .prize-row > span:nth-child(2) {
-  flex: 1;
-  min-width: 100px;
+  flex: 1 1 30%;
 }
 
 .prize-row > span:last-child {
-  flex: 1;
+  flex: 1 1 40%;
   text-align: right;
-  min-width: 120px;
 }
 
 .prize-row.header {
@@ -383,18 +382,11 @@
   .prize-row {
     font-size: 0.85rem;
     padding: 10px;
+    gap: 5px;
   }
 
   .prize-row > span:first-child {
-    flex: 0 0 45px;
-  }
-
-  .prize-row > span:nth-child(2) {
-    min-width: 80px;
-  }
-
-  .prize-row > span:last-child {
-    min-width: 100px;
+    width: 45px;
   }
 
   .prize-row.header {
@@ -410,6 +402,7 @@
   .main-numbers {
     flex-wrap: wrap;
     justify-content: center;
+    gap: 5px;
   }
 
   .result-ball {
@@ -420,41 +413,38 @@
     font-size: 0.95rem;
   }
 
-  .main-numbers {
-    gap: 5px;
-  }
-
   .round-search input {
     width: 100px;
   }
 
   .prize-row {
-    font-size: 0.8rem;
-    gap: 6px 8px;
+    font-size: 0.75rem;
+    padding: 8px 10px;
+    gap: 4px;
   }
 
   .prize-row > span:first-child {
-    flex: 0 0 40px;
+    width: 38px;
   }
 
-  .prize-row > span:nth-child(2) {
-    min-width: 70px;
+  .rank {
+    padding: 3px 6px;
+    font-size: 0.7rem;
   }
 
-  .prize-row > span:last-child {
-    min-width: 90px;
-    font-size: 0.75rem;
+  .amount {
+    font-size: 0.7rem;
   }
 
   .amount.secondary {
-    font-size: 0.75rem;
+    font-size: 0.7rem;
   }
 }
 
 @media (max-width: 390px) {
   .results-content {
-    padding: 15px;
-    gap: 15px;
+    padding: 12px;
+    gap: 12px;
   }
 
   .result-ball {
@@ -474,29 +464,27 @@
     margin: 0 3px;
   }
 
+  .prize-table {
+    padding: 12px;
+  }
+
   .prize-row {
-    font-size: 0.72rem;
-    padding: 8px 10px;
-    gap: 4px 6px;
+    font-size: 0.68rem;
+    padding: 6px 8px;
+    gap: 3px;
   }
 
   .prize-row > span:first-child {
-    flex: 0 0 35px;
-  }
-
-  .prize-row > span:nth-child(2) {
-    min-width: 60px;
-    flex: 0 1 auto;
-  }
-
-  .prize-row > span:last-child {
-    min-width: 80px;
-    font-size: 0.68rem;
+    width: 32px;
   }
 
   .rank {
-    padding: 3px 6px;
-    font-size: 0.65rem;
+    padding: 2px 4px;
+    font-size: 0.6rem;
+  }
+
+  .amount {
+    font-size: 0.6rem;
   }
 
   .nav-btn {
@@ -529,29 +517,6 @@
 
   .sales-value {
     font-size: 1rem;
-  }
-}
-
-@media (max-width: 360px) {
-  .result-ball {
-    width: 32px;
-    height: 32px;
-    min-width: 32px;
-    min-height: 32px;
-    font-size: 0.8rem;
-  }
-
-  .prize-row {
-    font-size: 0.68rem;
-  }
-
-  .prize-row > span:first-child {
-    flex: 0 0 32px;
-  }
-
-  .prize-row > span:last-child {
-    min-width: 70px;
-    font-size: 0.65rem;
   }
 }
 
