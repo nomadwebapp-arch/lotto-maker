@@ -642,16 +642,32 @@
   .machine-results-area {
     width: 100%;
     max-width: 400px;
+    margin: 0 auto;
   }
 
   .machine-results {
     min-width: unset;
+    align-items: center;
+  }
+
+  .machine-game-row {
+    justify-content: center;
   }
 }
 
 @media (max-width: 768px) {
   .machine-results {
     max-width: 100%;
+  }
+
+  .machine-results-area {
+    max-width: 100%;
+    padding: 0 10px;
+  }
+
+  .machine-game-row {
+    width: 100%;
+    justify-content: flex-start;
   }
 
   .machine-ball {

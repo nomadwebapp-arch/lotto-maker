@@ -4,9 +4,8 @@ import './ResultsPage.css';
 
 interface PrizeInfo {
   rank: number;
-  totalPrize: number;
-  winnerCount: number;
   prizePerWinner: number;
+  winnerCount: number;
 }
 
 interface LottoResult {
